@@ -1,0 +1,1 @@
+descripcipn, datos de la persona, nombre, foto, numero de control
