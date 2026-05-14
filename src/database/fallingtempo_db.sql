@@ -58,8 +58,7 @@ CREATE TABLE `cancion` (
   `genero` varchar(150) NOT NULL,
   `id_bateria` int(11) NOT NULL,
   `id_guitarra` int(11) NOT NULL,
-  `id_bajo` int(11) NOT NULL,
-  `id_usuarios` int(11) NOT NULL
+  `id_bajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -188,8 +187,7 @@ ALTER TABLE `usuarios`
 ALTER TABLE `cancion`
   ADD CONSTRAINT `id_bajo` FOREIGN KEY (`id_bajo`) REFERENCES `bajo` (`id_bajo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `id_bateria` FOREIGN KEY (`id_bateria`) REFERENCES `bateria` (`id_bateria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `id_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `favorito_user`
