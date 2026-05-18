@@ -61,7 +61,7 @@ def LoginView(page, auth_controller):
                 ),
 
                 ft.Text(
-                    "SIGE",
+                    "Login",
                     size=32,
                     weight="bold",
                     color=ft.Colors.WHITE
@@ -88,6 +88,11 @@ def LoginView(page, auth_controller):
                 ft.TextButton(
                     "Crear una cuenta nueva",
                     on_click=lambda _: page.go("/registro")
+                ),
+                
+                ft.TextButton(
+                    "Cambiar contraseña",
+                    on_click=lambda _: page.go("/cambiar-contraseña")
                 )
             ],
 

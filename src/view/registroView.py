@@ -84,7 +84,7 @@ def RegistroView(page, auth_controller):
                 ),
 
                 ft.Text(
-                    "SIGE",
+                    "Falling Tempo",
                     size=32,
                     weight="bold",
                     color=ft.Colors.WHITE
