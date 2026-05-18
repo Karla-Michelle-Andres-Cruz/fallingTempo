@@ -4,39 +4,54 @@ def RegistroView(page, auth_controller):
 
     nombre_input = ft.TextField(
         label="Nombre",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
-        prefix_icon=ft.Icons.PERSON
+        prefix_icon=ft.Icons.PERSON,
+        focus_color=ft.Colors.WHITE, 
+        color=ft.Colors.WHITE
     )
 
     apellido_input = ft.TextField(
         label="Apellido",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
-        prefix_icon=ft.Icons.BADGE
+        prefix_icon=ft.Icons.BADGE,
+        focus_color=ft.Colors.WHITE,
+        color=ft.Colors.WHITE
     )
 
     email_input = ft.TextField(
         label="Correo electrónico",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
-        prefix_icon=ft.Icons.EMAIL
+        prefix_icon=ft.Icons.EMAIL,
+        focus_color=ft.Colors.WHITE,
+        color=ft.Colors.WHITE
     )
 
     pass_input = ft.TextField(
         label="Contraseña",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
         password=True,
         can_reveal_password=True,
-        prefix_icon=ft.Icons.LOCK
+        prefix_icon=ft.Icons.LOCK,
+        focus_color=ft.Colors.WHITE,
+        color=ft.Colors.WHITE
     )
 
     telefono_input = ft.TextField(
         label="Teléfono (opcional)",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
-        prefix_icon=ft.Icons.PHONE
+        prefix_icon=ft.Icons.PHONE,
+        focus_color=ft.Colors.WHITE,
+        color=ft.Colors.WHITE
     )
 
     def registrar_click(e):

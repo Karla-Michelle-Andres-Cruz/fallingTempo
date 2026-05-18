@@ -4,18 +4,22 @@ def LoginView(page, auth_controller):
 
     email_input = ft.TextField(
         label="Correo electrónico",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
-        prefix_icon=ft.Icons.EMAIL
+        prefix_icon=ft.Icons.EMAIL,
+        color=ft.Colors.WHITE
     )
 
     pass_input = ft.TextField(
         label="Contraseña",
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
         password=True,
         can_reveal_password=True,
-        prefix_icon=ft.Icons.LOCK
+        prefix_icon=ft.Icons.LOCK,
+        color=ft.Colors.WHITE
     )
 
     def login_click(e):
@@ -88,6 +92,7 @@ def LoginView(page, auth_controller):
             ],
 
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            alignment=ft.MainAxisAlignment.CENTER,
             spacing=20
         )
     )
