@@ -8,7 +8,6 @@ def RegistroView(page, auth_controller):
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.PERSON,
-        focus_color=ft.Colors.WHITE, 
         color=ft.Colors.WHITE
     )
 
@@ -18,7 +17,6 @@ def RegistroView(page, auth_controller):
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.BADGE,
-        focus_color=ft.Colors.WHITE,
         color=ft.Colors.WHITE
     )
 
@@ -28,7 +26,6 @@ def RegistroView(page, auth_controller):
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.EMAIL,
-        focus_color=ft.Colors.WHITE,
         color=ft.Colors.WHITE
     )
 
@@ -40,7 +37,6 @@ def RegistroView(page, auth_controller):
         password=True,
         can_reveal_password=True,
         prefix_icon=ft.Icons.LOCK,
-        focus_color=ft.Colors.WHITE,
         color=ft.Colors.WHITE
     )
 
@@ -50,7 +46,6 @@ def RegistroView(page, auth_controller):
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.PHONE,
-        focus_color=ft.Colors.WHITE,
         color=ft.Colors.WHITE
     )
 

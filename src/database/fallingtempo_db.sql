@@ -42,7 +42,7 @@ CREATE TABLE `bajo` (
 CREATE TABLE `bateria` (
   `id_bateria` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `secuencia_bateria` varchar(200) NOT NULL
+  `sesion_bateria` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
