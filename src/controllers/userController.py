@@ -12,13 +12,15 @@ class AuthController:
                 nombre=nombre,
                 apellido=apellido,
                 email=email,
-                password=password
+                password=password,
+                telefono=telefono
             )
             self.model.registrar(
                 nombre=nuevo_usuario.nombre,
                 apellido=nuevo_usuario.apellido,
                 email=nuevo_usuario.email,
-                password=nuevo_usuario.password
+                password=nuevo_usuario.password,
+                telefono=nuevo_usuario.telefono
             )
             return True, "Usuario creado correctamente"
         except ValidationError as e:
