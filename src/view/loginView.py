@@ -89,10 +89,10 @@ def LoginView(page, auth_controller):
                     "Crear una cuenta nueva",
                     on_click=lambda _: page.go("/registro")
                 ),
-                
+
                 ft.TextButton(
-                    "Cambiar contraseña",
-                    on_click=lambda _: page.go("/cambiar-contraseña")
+                    "¿Olvidaste tu contraseña?",
+                    on_click=lambda _: page.go("/recuperar-contraseña")
                 )
             ],
 
