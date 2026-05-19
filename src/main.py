@@ -2,6 +2,7 @@ import flet as ft
 from controllers.userController import AuthController
 from view.loginView import LoginView
 from view.registroView import RegistroView
+from view.recuperarView import RecuperarView
 
 def start(page: ft.Page):
     auth_ctrl = AuthController()
@@ -13,6 +14,8 @@ def start(page: ft.Page):
             page.controls.append(LoginView(page, auth_ctrl))
         elif page.route == "/registro":
             page.controls.append(RegistroView(page, auth_ctrl))
+        elif page.route == "/recuperar-contraseña":
+            page.controls.append(RecuperarView(page, auth_ctrl))
         page.update()
 
     page.on_route_change = route_change

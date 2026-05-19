@@ -75,6 +75,17 @@ CREATE TABLE `favorito_user` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recuperacion_password`
+--
+
+CREATE TABLE `recuperacion_password` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `email` VARCHAR(100),
+    `codigo` VARCHAR(10),
+    `expiracion` DATETIME
+);
+
+--
 -- Estructura de tabla para la tabla `guitarra`
 --
 
