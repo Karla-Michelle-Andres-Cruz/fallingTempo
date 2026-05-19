@@ -8,14 +8,11 @@ from email.mime.text import MIMEText
 
 
 class AuthController:
-
     def __init__(self):
         self.model = Usuarios()
 
     def registrar_usuario(self, nombre, apellido, email, password, telefono=None):
-
         try:
-
             nuevo_usuario = UsuarioAlta(
                 nombre=nombre,
                 apellido=apellido,
@@ -23,7 +20,6 @@ class AuthController:
                 password=password,
                 telefono=telefono
             )
-
             self.model.registrar(
                 nombre=nuevo_usuario.nombre,
                 apellido=nuevo_usuario.apellido,
@@ -31,7 +27,6 @@ class AuthController:
                 password=nuevo_usuario.password,
                 telefono=nuevo_usuario.telefono
             )
-
             return True, "Usuario creado correctamente"
 
         except ValidationError as e:

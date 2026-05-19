@@ -3,7 +3,6 @@ from .dataBase import DataBase
 
 
 class Usuarios:
-
     def registrar(self, nombre, apellido, email, password, telefono=None):
         conn = DataBase.get_connection()
         cursor = conn.cursor()

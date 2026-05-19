@@ -25,32 +25,25 @@ def RecuperarView(page, auth_controller):
     )
 
     def enviar_codigo(e):
-
         success, msg = auth_controller.enviar_codigo_recuperacion(
             email_input.value
         )
-
         page.snack_bar = ft.SnackBar(ft.Text(msg))
         page.snack_bar.open = True
-
         if success:
             codigo_input.visible = True
             nueva_pass_input.visible = True
-
         page.update()
 
     def cambiar_password(e):
-
         success, msg = auth_controller.cambiar_password(
             email_input.value,
             codigo_input.value,
             nueva_pass_input.value
         )
-
         page.snack_bar = ft.SnackBar(ft.Text(msg))
         page.snack_bar.open = True
         page.update()
-
         if success:
             page.go("/")
 
