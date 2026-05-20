@@ -49,19 +49,31 @@ class AuthController:
                 return False, "El correo no existe"
             codigo = str(random.randint(100000, 999999))
             self.model.guardar_codigo(email, codigo)
-            remitente = "tucorreo@gmail.com"
-            password = "TU_APP_PASSWORD"
+            remitente = "andres.karlaa@gmail.com"
+            password = "jibg ihnk mmwc iqgi"
             mensaje = MIMEText(
                 f"Tu código de recuperación es: {codigo}"
             )
             mensaje["Subject"] = "Recuperación de contraseña"
             mensaje["From"] = remitente
             mensaje["To"] = email
-            servidor = smtplib.SMTP("smtp.gmail.com", 587)
-            servidor.starttls()
-            servidor.login(remitente, password)
-            servidor.send_message(mensaje)
-            servidor.quit()
+            try:
+                servidor = smtplib.SMTP("smtp.gmail.com", 587)
+
+                servidor.ehlo()
+                servidor.starttls()
+                servidor.ehlo()
+
+                servidor.login(remitente, password)
+
+                servidor.send_message(mensaje)
+
+                servidor.quit()
+
+                print("Correo enviado correctamente")
+
+            except Exception as e:
+                print("ERROR CORREO:", e)
 
             return True, "Código enviado al correo"
 

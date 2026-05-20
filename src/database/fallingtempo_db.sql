@@ -1,212 +1,118 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2026 a las 20:24:14
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             12.13.0.7147
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Base de datos: `fallingtempo_db`
---
 
--- --------------------------------------------------------
+-- Volcando estructura de base de datos para fallingtempo_db
+CREATE DATABASE IF NOT EXISTS `fallingtempo_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `fallingtempo_db`;
 
---
--- Estructura de tabla para la tabla `bajo`
---
-
-CREATE TABLE `bajo` (
-  `id_bajo` int(11) NOT NULL,
+-- Volcando estructura para tabla fallingtempo_db.bajo
+CREATE TABLE IF NOT EXISTS `bajo` (
+  `id_bajo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(200) NOT NULL,
-  `sesion_bajo` varchar(200) NOT NULL
+  `sesion_bajo` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_bajo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Volcando datos para la tabla fallingtempo_db.bajo: ~0 rows (aproximadamente)
 
---
--- Estructura de tabla para la tabla `bateria`
---
-
-CREATE TABLE `bateria` (
-  `id_bateria` int(11) NOT NULL,
+-- Volcando estructura para tabla fallingtempo_db.bateria
+CREATE TABLE IF NOT EXISTS `bateria` (
+  `id_bateria` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(150) NOT NULL,
-  `sesion_bateria` varchar(200) NOT NULL
+  `sesion_bateria` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_bateria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Volcando datos para la tabla fallingtempo_db.bateria: ~0 rows (aproximadamente)
 
---
--- Estructura de tabla para la tabla `cancion`
---
-
-CREATE TABLE `cancion` (
-  `id_cancion` int(11) NOT NULL,
+-- Volcando estructura para tabla fallingtempo_db.cancion
+CREATE TABLE IF NOT EXISTS `cancion` (
+  `id_cancion` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_cancion` varchar(150) NOT NULL,
   `artista` varchar(150) NOT NULL,
   `genero` varchar(150) NOT NULL,
   `id_bateria` int(11) NOT NULL,
   `id_guitarra` int(11) NOT NULL,
-  `id_bajo` int(11) NOT NULL
+  `id_bajo` int(11) NOT NULL,
+  PRIMARY KEY (`id_cancion`),
+  KEY `fk_cancion_bateria` (`id_bateria`),
+  KEY `fk_cancion_guitarra` (`id_guitarra`),
+  KEY `fk_cancion_bajo` (`id_bajo`),
+  CONSTRAINT `fk_cancion_bajo` FOREIGN KEY (`id_bajo`) REFERENCES `bajo` (`id_bajo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_cancion_bateria` FOREIGN KEY (`id_bateria`) REFERENCES `bateria` (`id_bateria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_cancion_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Volcando datos para la tabla fallingtempo_db.cancion: ~0 rows (aproximadamente)
 
---
--- Estructura de tabla para la tabla `favorito_user`
---
-
-CREATE TABLE `favorito_user` (
-  `id_favorito` int(11) NOT NULL,
-  `id_cancion` int(11) NOT NULL
+-- Volcando estructura para tabla fallingtempo_db.favorito_user
+CREATE TABLE IF NOT EXISTS `favorito_user` (
+  `id_favorito` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_cancion` int(11) NOT NULL,
+  PRIMARY KEY (`id_favorito`),
+  KEY `fk_favorito_usuario` (`id_usuario`),
+  KEY `fk_favorito_cancion` (`id_cancion`),
+  CONSTRAINT `fk_favorito_cancion` FOREIGN KEY (`id_cancion`) REFERENCES `cancion` (`id_cancion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_favorito_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Volcando datos para la tabla fallingtempo_db.favorito_user: ~0 rows (aproximadamente)
 
---
--- Estructura de tabla para la tabla `recuperacion_password`
---
-
-CREATE TABLE `recuperacion_password` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `email` VARCHAR(100),
-    `codigo` VARCHAR(10),
-    `expiracion` DATETIME
-);
-
---
--- Estructura de tabla para la tabla `guitarra`
---
-
-CREATE TABLE `guitarra` (
-  `id_guitarra` int(11) NOT NULL,
+-- Volcando estructura para tabla fallingtempo_db.guitarra
+CREATE TABLE IF NOT EXISTS `guitarra` (
+  `id_guitarra` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(150) NOT NULL,
-  `sesion_guitarra` varchar(200) NOT NULL
+  `sesion_guitarra` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_guitarra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Volcando datos para la tabla fallingtempo_db.guitarra: ~0 rows (aproximadamente)
 
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id_usuarios` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+-- Volcando estructura para tabla fallingtempo_db.recuperacion_password
+CREATE TABLE IF NOT EXISTS `recuperacion_password` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `apellido` varchar(100) NOT NULL,
-  `telefono` int(11) NOT NULL
+  `codigo` varchar(10) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_recuperacion_usuario` (`email`),
+  CONSTRAINT `fk_recuperacion_usuario` FOREIGN KEY (`email`) REFERENCES `usuarios` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Índices para tablas volcadas
---
+-- Volcando datos para la tabla fallingtempo_db.recuperacion_password: ~0 rows (aproximadamente)
 
---
--- Indices de la tabla `bajo`
---
-ALTER TABLE `bajo`
-  ADD PRIMARY KEY (`id_bajo`);
+-- Volcando estructura para tabla fallingtempo_db.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id_usuarios` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_usuarios`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Indices de la tabla `bateria`
---
-ALTER TABLE `bateria`
-  ADD PRIMARY KEY (`id_bateria`);
+-- Volcando datos para la tabla fallingtempo_db.usuarios: ~0 rows (aproximadamente)
 
---
--- Indices de la tabla `cancion`
---
-ALTER TABLE `cancion`
-  ADD PRIMARY KEY (`id_cancion`),
-  ADD KEY `id_bateria` (`id_bateria`),
-  ADD KEY `id_guitarra` (`id_guitarra`),
-  ADD KEY `id_bajo` (`id_bajo`);
-
---
--- Indices de la tabla `favorito_user`
---
-ALTER TABLE `favorito_user`
-  ADD KEY `id_cancion` (`id_cancion`);
-
---
--- Indices de la tabla `guitarra`
---
-ALTER TABLE `guitarra`
-  ADD PRIMARY KEY (`id_guitarra`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuarios`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `bajo`
---
-ALTER TABLE `bajo`
-  MODIFY `id_bajo` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `bateria`
---
-ALTER TABLE `bateria`
-  MODIFY `id_bateria` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `cancion`
---
-ALTER TABLE `cancion`
-  MODIFY `id_cancion` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `guitarra`
---
-ALTER TABLE `guitarra`
-  MODIFY `id_guitarra` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `cancion`
---
-ALTER TABLE `cancion`
-  ADD CONSTRAINT `id_bajo` FOREIGN KEY (`id_bajo`) REFERENCES `bajo` (`id_bajo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_bateria` FOREIGN KEY (`id_bateria`) REFERENCES `bateria` (`id_bateria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `favorito_user`
---
-ALTER TABLE `favorito_user`
-  ADD CONSTRAINT `id_cancion` FOREIGN KEY (`id_cancion`) REFERENCES `cancion` (`id_cancion`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
