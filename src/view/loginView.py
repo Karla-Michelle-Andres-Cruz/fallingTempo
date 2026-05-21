@@ -93,6 +93,11 @@ def LoginView(page, auth_controller):
                 ft.TextButton(
                     "¿Olvidaste tu contraseña?",
                     on_click=lambda _: page.go("/recuperar-contraseña")
+                ),
+                
+                ft.TextButton(
+                    "Home",
+                    on_click=lambda _: page.go("/home")
                 )
             ],
 

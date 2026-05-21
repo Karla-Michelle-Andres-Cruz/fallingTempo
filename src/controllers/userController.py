@@ -96,3 +96,7 @@ class AuthController:
 
         except Exception as e:
             return False, str(e)
+    
+    def HomeView(self, page):
+        from view.homeView import HomeView
+        return HomeView(page)
