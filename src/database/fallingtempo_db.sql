@@ -21,92 +21,92 @@ USE `fallingtempo_db`;
 
 -- Volcando estructura para tabla fallingtempo_db.bajo
 CREATE TABLE IF NOT EXISTS `bajo` (
-  `id_bajo` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) NOT NULL,
-  `sesion_bajo` varchar(200) NOT NULL,
-  PRIMARY KEY (`id_bajo`)
+    `id_bajo` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(200) NOT NULL,
+    `sesion_bajo` varchar(200) NOT NULL,
+    PRIMARY KEY (`id_bajo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.bajo: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla fallingtempo_db.bateria
 CREATE TABLE IF NOT EXISTS `bateria` (
-  `id_bateria` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(150) NOT NULL,
-  `sesion_bateria` varchar(200) NOT NULL,
-  PRIMARY KEY (`id_bateria`)
+    `id_bateria` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(150) NOT NULL,
+    `sesion_bateria` varchar(200) NOT NULL,
+    PRIMARY KEY (`id_bateria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.bateria: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla fallingtempo_db.cancion
 CREATE TABLE IF NOT EXISTS `cancion` (
-  `id_cancion` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_cancion` varchar(150) NOT NULL,
-  `artista` varchar(150) NOT NULL,
-  `genero` varchar(150) NOT NULL,
-  `id_bateria` int(11) NOT NULL,
-  `id_guitarra` int(11) NOT NULL,
-  `id_bajo` int(11) NOT NULL,
-  PRIMARY KEY (`id_cancion`),
-  KEY `fk_cancion_bateria` (`id_bateria`),
-  KEY `fk_cancion_guitarra` (`id_guitarra`),
-  KEY `fk_cancion_bajo` (`id_bajo`),
-  CONSTRAINT `fk_cancion_bajo` FOREIGN KEY (`id_bajo`) REFERENCES `bajo` (`id_bajo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_cancion_bateria` FOREIGN KEY (`id_bateria`) REFERENCES `bateria` (`id_bateria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_cancion_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE
+    `id_cancion` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre_cancion` varchar(150) NOT NULL,
+    `artista` varchar(150) NOT NULL,
+    `genero` varchar(150) NOT NULL,
+    `id_bateria` int(11) NOT NULL,
+    `id_guitarra` int(11) NOT NULL,
+    `id_bajo` int(11) NOT NULL,
+    PRIMARY KEY (`id_cancion`),
+    KEY `fk_cancion_bateria` (`id_bateria`),
+    KEY `fk_cancion_guitarra` (`id_guitarra`),
+    KEY `fk_cancion_bajo` (`id_bajo`),
+    CONSTRAINT `fk_cancion_bajo` FOREIGN KEY (`id_bajo`) REFERENCES `bajo` (`id_bajo`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_cancion_bateria` FOREIGN KEY (`id_bateria`) REFERENCES `bateria` (`id_bateria`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_cancion_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.cancion: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla fallingtempo_db.favorito_user
 CREATE TABLE IF NOT EXISTS `favorito_user` (
-  `id_favorito` int(11) NOT NULL AUTO_INCREMENT,
-  `id_usuario` int(11) NOT NULL,
-  `id_cancion` int(11) NOT NULL,
-  PRIMARY KEY (`id_favorito`),
-  KEY `fk_favorito_usuario` (`id_usuario`),
-  KEY `fk_favorito_cancion` (`id_cancion`),
-  CONSTRAINT `fk_favorito_cancion` FOREIGN KEY (`id_cancion`) REFERENCES `cancion` (`id_cancion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_favorito_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE ON UPDATE CASCADE
+    `id_favorito` int(11) NOT NULL AUTO_INCREMENT,
+    `id_usuario` int(11) NOT NULL,
+    `id_cancion` int(11) NOT NULL,
+    PRIMARY KEY (`id_favorito`),
+    KEY `fk_favorito_usuario` (`id_usuario`),
+    KEY `fk_favorito_cancion` (`id_cancion`),
+    CONSTRAINT `fk_favorito_cancion` FOREIGN KEY (`id_cancion`) REFERENCES `cancion` (`id_cancion`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_favorito_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.favorito_user: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla fallingtempo_db.guitarra
 CREATE TABLE IF NOT EXISTS `guitarra` (
-  `id_guitarra` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(150) NOT NULL,
-  `sesion_guitarra` varchar(200) NOT NULL,
-  PRIMARY KEY (`id_guitarra`)
+    `id_guitarra` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(150) NOT NULL,
+    `sesion_guitarra` varchar(200) NOT NULL,
+    PRIMARY KEY (`id_guitarra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.guitarra: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla fallingtempo_db.recuperacion_password
 CREATE TABLE IF NOT EXISTS `recuperacion_password` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `codigo` varchar(10) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `fk_recuperacion_usuario` (`email`),
-  CONSTRAINT `fk_recuperacion_usuario` FOREIGN KEY (`email`) REFERENCES `usuarios` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `email` varchar(100) NOT NULL,
+    `codigo` varchar(10) NOT NULL,
+    `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`id`),
+    KEY `fk_recuperacion_usuario` (`email`),
+    CONSTRAINT `fk_recuperacion_usuario` FOREIGN KEY (`email`) REFERENCES `usuarios` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.recuperacion_password: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla fallingtempo_db.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id_usuarios` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `telefono` varchar(20) DEFAULT NULL,
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id_usuarios`),
-  UNIQUE KEY `email` (`email`)
+    `id_usuarios` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(100) NOT NULL,
+    `apellido` varchar(100) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `telefono` varchar(20) DEFAULT NULL,
+    `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`id_usuarios`),
+    UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla fallingtempo_db.usuarios: ~0 rows (aproximadamente)
