@@ -5,14 +5,18 @@ def RecuperarView(page, auth_controller):
     email_input = ft.TextField(
         label="Correo electrónico",
         width=350,
-        border_radius=10
+        border_radius=10,
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        color=ft.Colors.WHITE,
     )
 
     codigo_input = ft.TextField(
         label="Código",
         width=350,
         border_radius=10,
-        visible=False
+        visible=False,
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        color=ft.Colors.WHITE,
     )
 
     nueva_pass_input = ft.TextField(
@@ -21,7 +25,9 @@ def RecuperarView(page, auth_controller):
         can_reveal_password=True,
         width=350,
         border_radius=10,
-        visible=False
+        visible=False,
+        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        color=ft.Colors.WHITE,
     )
 
     def enviar_codigo(e):
