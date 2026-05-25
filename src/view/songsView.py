@@ -59,23 +59,13 @@ BD|o-------o-------|
         page.go("/home")
 
 
-    tabs_control = ft.Tabs(
-        selected_index=0,
-        on_change=change_tab,
+    tabs_control = ft.Text(
+        
+            ft.Text("GUITARRA"),
+            ft.Text("BAJO"),
+            ft.Text("BATERÍA")
+        
 
-        tabs=[
-            ft.Tab(
-                label="Guitarra"
-            ),
-
-            ft.Tab(
-                label="Bajo"
-            ),
-
-            ft.Tab(
-                label="Batería"
-            ),
-        ]
     )
 
 
@@ -88,13 +78,6 @@ BD|o-------o-------|
             scroll=ft.ScrollMode.AUTO,
 
             controls=[
-
-                ft.IconButton(
-                    icon=ft.icons.ARROW_BACK,
-                    icon_color="white",
-                    on_click=go_back
-                ),
-
 
                 ft.Text(
                     value=song["title"],
@@ -123,23 +106,6 @@ BD|o-------o-------|
 
                         controls=[
 
-                            # BOTONES
-                            ft.Row(
-                                controls=[
-
-                                    ft.IconButton(
-                                        icon=ft.icons.PLAY_ARROW,
-                                        icon_color="white"
-                                    ),
-
-                                    ft.IconButton(
-                                        icon=ft.icons.PAUSE,
-                                        icon_color="white"
-                                    ),
-                                ]
-                            ),
-
-                            # TIEMPO
                             ft.Text(
                                 value="01:23 / 08:35",
                                 color="white"

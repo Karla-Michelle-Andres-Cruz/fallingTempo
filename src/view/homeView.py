@@ -7,6 +7,14 @@ def HomeView(page, auth_controller):
     page.title = "Tabs Music"
     page.bgcolor = "#13294B"
 
+    page.navigation_bar = ft.NavigationBar(
+        destinations=[
+            ft.NavigationBarDestination(icon=ft.Icons.HOME, label="Inicio"),
+            ft.NavigationBarDestination(icon=ft.Icons.PERSON, label="Usuarios"),
+            ft.NavigationBarDestination(icon=ft.Icons.BOOKMARK_BORDER, label="Favoritas"),
+        ]
+    )
+
     
     songs_data = [
     {
