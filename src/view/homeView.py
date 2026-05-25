@@ -1,5 +1,6 @@
 import flet as ft
 import random
+from view.songsView import SongView
 
 
 def HomeView(page, auth_controller):
@@ -7,44 +8,59 @@ def HomeView(page, auth_controller):
     page.bgcolor = "#13294B"
 
     
-    song_names = [
-        "Broken Dreams",
-        "Electric Fire",
-        "Night Escape",
-        "Silent Thunder",
-        "Dark Horizon",
-        "Golden Skies",
-        "Lost Memories",
-        "Neon Lights",
-        "Crimson Moon",
-        "Fading Stars",
+    songs_data = [
+    {
+        "title": "Bend the clock",
+        "artist": "Dream Theater"
+    },
+
+    {
+        "title": "Save me",
+        "artist": "Avenged Sevenfold"
+    },
+
+    {
+        "title": "Nightmare to remember",
+        "artist": "Dream Theater"
+    },
+
+    {
+        "title": "Gunslinger",
+        "artist": "Avenged Sevenfold"
+    },
+
+    {
+        "title": "Danger Line",
+        "artist": "Avenged Sevenfold"
+    },
+
+    {
+        "title": "The Count of Tuscany",
+        "artist": "Dream Theater"
+    },
+
+    {
+        "title": "Hail to the King",
+        "artist": "Avenged Sevenfold"
+    },
+
+    {
+        "title": "Dance of Eternity",
+        "artist": "Dream Theater"
+    },
+
+    {
+        "title": "In the Name of God",
+        "artist": "Dream Theater"
+    },
+
+    {
+        "title": "Stream of Consciousness",
+        "artist": "Dream Theater"
+    }
     ]
-
-    artists = [
-        "The Wolves",
-        "Nova",
-        "Black Echo",
-        "Skyline",
-        "Firestorm",
-        "Velvet Sound",
-        "Dream Hunters",
-        "The Shadows",
-        "Unknown Signal",
-        "Last Desire",
-    ]
-
-    def generate_songs(amount=20):
-        songs = []
-
-        for i in range(amount):
-            songs.append({
-                "title": random.choice(song_names),
-                "artist": random.choice(artists)
-            })
-
-        return songs
-
-    songs = generate_songs()
+    
+    songs = random.sample(songs_data, len(songs_data))
 
     title = ft.Text(
         "Buscar",
@@ -52,6 +68,15 @@ def HomeView(page, auth_controller):
         weight=ft.FontWeight.BOLD,
         color="white",
     )
+    
+    def open_song(song):
+
+        page.clean()
+        page.add(
+            SongView(page, song)
+    )
+
+    page.update()
 
     search_bar = ft.TextField(
         hint_text="Un millón de tablaturas",
@@ -69,6 +94,9 @@ def HomeView(page, auth_controller):
     for index, song in enumerate(songs, start=1):
 
         song_item = ft.Container(
+            on_click=lambda e, s=song: open_song(s),
+            ink=True,
+            animate=200,
             bgcolor="#111111",
             border_radius=15,
             padding=15,
