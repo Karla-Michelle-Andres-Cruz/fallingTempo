@@ -39,7 +39,7 @@ def LoginView(page, auth_controller):
 
         if user:
             page.data = {"user": user}
-            page.go("/dashboard")
+            page.go("/home")
         else:
             page.snack_bar = ft.SnackBar(
                 ft.Text(msg),
@@ -94,11 +94,6 @@ def LoginView(page, auth_controller):
                     "¿Olvidaste tu contraseña?",
                     on_click=lambda _: page.go("/recuperar-contraseña")
                 ),
-                
-                ft.TextButton(
-                    "Home",
-                    on_click=lambda _: page.go("/home")
-                )
             ],
 
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,

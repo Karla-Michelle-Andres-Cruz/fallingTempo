@@ -9,6 +9,7 @@ from email.mime.text import MIMEText
 
 class AuthController:
     def __init__(self):
+        self.current_user = None
         self.model = Usuarios()
 
     def registrar_usuario(self, nombre, apellido, email, password, telefono=None):
