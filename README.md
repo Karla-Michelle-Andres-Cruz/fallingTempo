@@ -1,3 +1,15 @@
+# Practicas
+
+- Practica 1:
+  - loginView.py
+  - base de datos (fallingtempo_db.sql)
+- practica 2:
+  - registroView.py
+  - recuperarView.py
+- practica 3:
+  - homeView.py
+  - songsView.py
+
 
 # Descripcion
 
