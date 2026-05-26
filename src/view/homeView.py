@@ -7,11 +7,34 @@ def HomeView(page, auth_controller):
     page.title = "Tabs Music"
     page.bgcolor = "#13294B"
 
+    def change_tab(e):
+        index = e.control.selected_index
+        if index == 0:
+            page.go("/home")
+        elif index == 1:
+            page.go("/usuarios")
+        elif index == 2:
+            page.go("/favoritas")
+
+
     page.navigation_bar = ft.NavigationBar(
+        selected_index=0,
+        on_change=change_tab,
         destinations=[
-            ft.NavigationBarDestination(icon=ft.Icons.HOME, label="Inicio"),
-            ft.NavigationBarDestination(icon=ft.Icons.PERSON, label="Usuarios"),
-            ft.NavigationBarDestination(icon=ft.Icons.BOOKMARK_BORDER, label="Favoritas"),
+            ft.NavigationBarDestination(
+                icon=ft.Icons.HOME,
+                label="Inicio"
+            ),
+
+            ft.NavigationBarDestination(
+                icon=ft.Icons.PERSON,
+                label="Usuarios"
+            ),
+
+            ft.NavigationBarDestination(
+                icon=ft.Icons.BOOKMARK_BORDER,
+                label="Favoritas"
+            ),
         ]
     )
 

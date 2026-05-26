@@ -4,6 +4,8 @@ from view.homeView import HomeView
 from view.loginView import LoginView
 from view.registroView import RegistroView
 from view.recuperarView import RecuperarView
+from view.userView import UserView
+from view.favoritosView import FavoritosView
 
 def start(page: ft.Page):
     auth_ctrl = AuthController()
@@ -19,6 +21,10 @@ def start(page: ft.Page):
             page.controls.append(RecuperarView(page, auth_ctrl))
         elif page.route == "/home":
             page.controls.append(HomeView(page, auth_ctrl))
+        elif page.route == "/usuarios":
+            page.controls.append(UserView(page, auth_ctrl))
+        elif page.route == "/favoritas":
+            page.controls.append(FavoritosView(page, auth_ctrl))
         page.update()
         
     
