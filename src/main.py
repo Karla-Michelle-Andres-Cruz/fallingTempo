@@ -10,6 +10,8 @@ from view.favoritosView import FavoritosView
 def start(page: ft.Page):
     auth_ctrl = AuthController()
 
+    page.navigation_bar = None
+
     def route_change(e):
         print(f" route_change llamado: {page.route}")
         page.controls.clear()

@@ -41,13 +41,15 @@ def RegistroView(page, auth_controller):
     )
 
     telefono_input = ft.TextField(
-        label="Teléfono (opcional)",
+        label="Teléfono",
         label_style=ft.TextStyle(color=ft.Colors.WHITE70),
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.PHONE,
         color=ft.Colors.WHITE
     )
+
+    
 
     def registrar_click(e):
 

@@ -101,3 +101,6 @@ class AuthController:
     def HomeView(self, page):
         from view.homeView import HomeView
         return HomeView(page)
+    
+    def logout(self):
+        self.current_user = None

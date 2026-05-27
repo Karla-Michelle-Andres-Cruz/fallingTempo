@@ -5,7 +5,14 @@ def UserView(page, auth_controller):
     page.title = "Perfil"
     page.bgcolor = "#13294B"
 
-    user = auth_controller.current_user
+    user = page.data.get("user")
+
+    def cerrar_sesion(e):
+        auth_controller.logout()
+        page.navigation_bar = None
+        page.data.clear()
+        page.go("/")
+        page.update()
 
     if not user:
         return ft.Container(
@@ -102,6 +109,30 @@ def UserView(page, auth_controller):
                             )
                         ]
                     ),
+
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        controls=[
+                            ft.Icon(ft.Icons.PHONE, color="white70"),
+
+                            ft.Text(
+                                user["fecha_registro"]
+                                if user["fecha_registro"]
+                                else "Sin fecha de registro",
+                                color="white70"
+                            )
+                        ]
+                    ),
+
+                    ft.ElevatedButton(
+                        "Cerrar sesión",
+                        icon=ft.Icons.LOGOUT,
+                        bgcolor=ft.Colors.RED_400,
+                        color="white",
+                        on_click=cerrar_sesion
+                    ),
+
+
                 ]
             )
         )
@@ -109,8 +140,6 @@ def UserView(page, auth_controller):
 
     return ft.Container(
         expand=True,
-
-        alignment=ft.alignment.center,
-
+        alignment=ft.Alignment(0, 0),
         content=profile_card
     )
