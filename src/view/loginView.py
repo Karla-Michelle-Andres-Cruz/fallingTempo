@@ -94,6 +94,7 @@ def LoginView(page, auth_controller):
                     "¿Olvidaste tu contraseña?",
                     on_click=lambda _: page.go("/recuperar-contraseña")
                 ),
+            
             ],
 
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,

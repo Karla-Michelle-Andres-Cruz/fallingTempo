@@ -127,6 +127,7 @@ source = { editable = "." }
 dependencies = [
     { name = "bcrypt" },
     { name = "flet" },
+    { name = "flet-audio" },
     { name = "mysql-connector-python" },
     { name = "pydantic", extra = ["email"] },
     { name = "python-dotenv" },
@@ -137,6 +138,7 @@ dependencies = [
 requires-dist = [
     { name = "bcrypt", specifier = ">=5.0.0" },
     { name = "flet", specifier = ">=0.85.1" },
+    { name = "flet-audio", specifier = ">=0.85.1" },
     { name = "mysql-connector-python", specifier = ">=9.6.0" },
     { name = "pydantic", extras = ["email"], specifier = ">=2.13.3" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
@@ -156,6 +158,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b2/71/32b7272b36679e6fbc71517bf80dff93197fde4aee8acb1b0d55fa5cc888/flet-0.85.1.tar.gz", hash = "sha256:5e27183ce2e51f8fec0068fd1d7683858d848a9309218e06034e65ac5f400c24", size = 501448, upload-time = "2026-05-13T16:35:54.771Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/38/2e/7c4d42e9f2c6b8a69d8ff8fd04e0e5f130c43bd92d9924a108d26fbd88fd/flet-0.85.1-py3-none-any.whl", hash = "sha256:34c962f11118e9f92fff77705fce9b257aab9d1d48012ce0a6d08c907918c70a", size = 579796, upload-time = "2026-05-13T16:35:56.605Z" },
+]
+
+[[package]]
+name = "flet-audio"
+version = "0.85.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "flet" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e4/ec/6fcc39619da9f2caaa532d734a78fa2107066e1ca817a9d2c8efcf3e9db2/flet_audio-0.85.1.tar.gz", hash = "sha256:3b2d6f036aa1ca2f4dca33cc88d0b18bfd321d238b7f474d1402ce4e86256f87", size = 10695, upload-time = "2026-05-13T16:36:17.776Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/09/8f/49849e2e7dc6525b04f598b73bdb236e85a04af609b7887cabee1d6a6ae6/flet_audio-0.85.1-py3-none-any.whl", hash = "sha256:fd7d35d23de86dc182226ddfbfa1ec72a179a9a7c8f9c6d8ce68c7f7a290d9ed", size = 12483, upload-time = "2026-05-13T16:36:16.611Z" },
 ]
 
 [[package]]

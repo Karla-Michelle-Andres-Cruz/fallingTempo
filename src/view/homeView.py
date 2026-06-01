@@ -41,55 +41,11 @@ def HomeView(page, auth_controller):
     
     songs_data = [
     {
-        "title": "Bend the clock",
-        "artist": "Dream Theater"
-    },
+        "title": "afterlife",
+        "artist": "Avenged Sevenfold",
+        "audio": "afterlife.mp3"
 
-    {
-        "title": "Save me",
-        "artist": "Avenged Sevenfold"
-    },
-
-    {
-        "title": "Nightmare to remember",
-        "artist": "Dream Theater"
-    },
-
-    {
-        "title": "Gunslinger",
-        "artist": "Avenged Sevenfold"
-    },
-
-    {
-        "title": "Danger Line",
-        "artist": "Avenged Sevenfold"
-    },
-
-    {
-        "title": "The Count of Tuscany",
-        "artist": "Dream Theater"
-    },
-
-    {
-        "title": "Hail to the King",
-        "artist": "Avenged Sevenfold"
-    },
-
-    {
-        "title": "Dance of Eternity",
-        "artist": "Dream Theater"
-    },
-
-    {
-        "title": "In the Name of God",
-        "artist": "Dream Theater"
-    },
-
-    {
-        "title": "Stream of Consciousness",
-        "artist": "Dream Theater"
-    }
-    ]
+    }]
     
     songs = random.sample(songs_data, len(songs_data))
 
@@ -178,11 +134,6 @@ def HomeView(page, auth_controller):
         padding=15,
         bgcolor="#5A5D8F",
         border_radius=15,
-        content=ft.Text(
-            "Transcribir con IA",
-            color="white",
-            weight=ft.FontWeight.BOLD,
-        ),
     )
 
     return ft.Container(
