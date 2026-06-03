@@ -9,7 +9,7 @@ from view.favoritosView import FavoritosView
 
 def start(page: ft.Page):
     auth_ctrl = AuthController()
-
+    page.bgcolor = ft.Colors.WHITE
     page.navigation_bar = None
 
     def route_change(e):

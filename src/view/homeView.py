@@ -5,7 +5,7 @@ from view.songsView import SongView
 
 def HomeView(page, auth_controller):
     page.title = "Tabs Music"
-    page.bgcolor = "#13294B"
+    page.bgcolor = "#FFF8EC"
 
     def change_tab(e):
         index = e.control.selected_index
@@ -53,7 +53,7 @@ def HomeView(page, auth_controller):
         "Buscar",
         size=32,
         weight=ft.FontWeight.BOLD,
-        color="white",
+        color="black",
     )
     
     def open_song(song):
@@ -67,10 +67,11 @@ def HomeView(page, auth_controller):
 
     search_bar = ft.TextField(
         hint_text="Un millón de tablaturas",
-        bgcolor="#4E5D78",
+        prefix_icon=ft.Icons.SEARCH,
+        bgcolor="#FFF8EC",
         border_radius=20,
         border_color="transparent",
-        color="white",
+        color="black",
     )
 
     song_column = ft.Column(
@@ -84,7 +85,7 @@ def HomeView(page, auth_controller):
             on_click=lambda e, s=song: open_song(s),
             ink=True,
             animate=200,
-            bgcolor="#111111",
+            bgcolor="#FFF8EC",
             border_radius=15,
             padding=15,
             content=ft.Row(
@@ -94,7 +95,7 @@ def HomeView(page, auth_controller):
                         controls=[
                             ft.Text(
                                 f"{index}.",
-                                color="white70",
+                                color="black",
                                 size=18
                             ),
 
@@ -103,14 +104,14 @@ def HomeView(page, auth_controller):
                                 controls=[
                                     ft.Text(
                                         song["title"],
-                                        color="white",
+                                        color="black",
                                         size=20,
                                         weight=ft.FontWeight.BOLD,
                                     ),
 
                                     ft.Text(
                                         song["artist"],
-                                        color="white54",
+                                        color="black54",
                                         size=16,
                                     ),
                                 ],
@@ -121,7 +122,6 @@ def HomeView(page, auth_controller):
                     ft.Row(
                         spacing=10,
                         controls=[
-                            
                         ],
                     ),
                 ],
@@ -132,12 +132,12 @@ def HomeView(page, auth_controller):
 
     floating_button = ft.Container(
         padding=15,
-        bgcolor="#5A5D8F",
+        bgcolor="#99AD7A",
         border_radius=15,
     )
 
     return ft.Container(
-        bgcolor="#13294B",
+        bgcolor="#DCCCAC",
         padding=20,
         expand=True,
         content=ft.Column(

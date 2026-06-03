@@ -4,67 +4,98 @@ def RegistroView(page, auth_controller):
 
     nombre_input = ft.TextField(
         label="Nombre",
-        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.PERSON,
-        color=ft.Colors.WHITE
+        color=ft.Colors.BLACK
     )
 
     apellido_input = ft.TextField(
         label="Apellido",
-        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.BADGE,
-        color=ft.Colors.WHITE
+        color=ft.Colors.BLACK
     )
 
     email_input = ft.TextField(
         label="Correo electrónico",
-        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.EMAIL,
-        color=ft.Colors.WHITE
+        color=ft.Colors.BLACK
     )
 
     pass_input = ft.TextField(
         label="Contraseña",
-        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
         width=350,
         border_radius=10,
         password=True,
         can_reveal_password=True,
         prefix_icon=ft.Icons.LOCK,
-        color=ft.Colors.WHITE
+        color=ft.Colors.BLACK
+    )
+
+    pass_confirm_input = ft.TextField(
+        label="Confirmar contraseña",
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
+        width=350,
+        border_radius=10,
+        password=True,
+        can_reveal_password=True,
+        prefix_icon=ft.Icons.LOCK,
+        color=ft.Colors.BLACK
     )
 
     telefono_input = ft.TextField(
         label="Teléfono",
-        label_style=ft.TextStyle(color=ft.Colors.WHITE70),
+        label_style=ft.TextStyle(color=ft.Colors.BLACK),
         width=350,
         border_radius=10,
         prefix_icon=ft.Icons.PHONE,
-        color=ft.Colors.WHITE
+        color=ft.Colors.BLACK
     )
 
-    
+    def validarPassword(pass1, pass2):
+        if pass1 != pass2:
+            return False, "Las contraseñas no coinciden"
+        if len(pass1) < 6:
+            return False, "La contraseña debe tener al menos 6 caracteres"
+        return True, ""
+
+    error_text = ft.Text("", color=ft.Colors.RED, size=20)
 
     def registrar_click(e):
+
+        valido, mensaje = validarPassword(
+            pass_input.value,
+            pass_confirm_input.value
+        )
+
+        if not valido:
+            error_text.value = mensaje
+            page.update()
+            return
 
         success, msg = auth_controller.registrar_usuario(
             nombre_input.value,
             apellido_input.value,
             email_input.value,
             pass_input.value,
+            pass_confirm_input.value,
             telefono_input.value
         )
 
-        page.snack_bar = ft.SnackBar(
-            ft.Text(msg),
-            open=True
-        )
+        if success:
+            error_text.color = ft.Colors.GREEN_300
+            error_text.value = "Usuario creado correctamente"
+        else:
+            error_text.color = ft.Colors.RED_300
+            error_text.value = msg
 
         page.update()
 
@@ -73,7 +104,7 @@ def RegistroView(page, auth_controller):
 
     return ft.Container(
         expand=True,
-        bgcolor=ft.Colors.BLUE_GREY_900,
+        bgcolor="#FFF8EC",
 
         alignment=ft.Alignment(0, 0),
 
@@ -82,26 +113,21 @@ def RegistroView(page, auth_controller):
                 ft.Icon(
                     ft.Icons.PERSON_ADD,
                     size=70,
-                    color=ft.Colors.PINK_200
-                ),
-
-                ft.Text(
-                    "Falling Tempo",
-                    size=32,
-                    weight="bold",
-                    color=ft.Colors.WHITE
+                    color="#DCCCAC"
                 ),
 
                 ft.Text(
                     "Crear cuenta nueva",
-                    size=18,
-                    color=ft.Colors.WHITE70
+                    size=32,
+                    weight="bold",
+                    color=ft.Colors.BLACK
                 ),
 
                 nombre_input,
                 apellido_input,
                 email_input,
                 pass_input,
+                pass_confirm_input,
                 telefono_input,
 
                 ft.ElevatedButton(
@@ -109,9 +135,11 @@ def RegistroView(page, auth_controller):
                     on_click=registrar_click,
                     width=350,
                     height=45,
-                    bgcolor=ft.Colors.PINK_200,
-                    color=ft.Colors.WHITE
+                    bgcolor="#DCCCAC",
+                    color=ft.Colors.BLACK
                 ),
+
+                error_text,
 
                 ft.TextButton(
                     "Ya tengo cuenta",

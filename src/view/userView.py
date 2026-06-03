@@ -5,13 +5,55 @@ def UserView(page, auth_controller):
     page.title = "Perfil"
     page.bgcolor = "#13294B"
 
-    user = page.data.get("user")
+    user = auth_controller.current_user
 
     def cerrar_sesion(e):
         auth_controller.logout()
         page.navigation_bar = None
-        page.data.clear()
+        page.data = None
         page.go("/")
+        page.update()
+
+    def editar_perfil(e):
+        page.go("/editar-perfil")
+
+    def confirmar_eliminacion(e):
+        print("ELIMINANDO USUARIO:", user["id_usuarios"])
+        auth_controller.eliminar_usuario(user["id_usuarios"])
+        auth_controller.logout()
+        page.navigation_bar = None
+        if page.data:
+            page.data.clear()
+        page.go("/")
+
+    def eliminar_cuenta(e):
+        dlg = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Confirmar eliminación"),
+            content=ft.Text(
+                "¿Estás seguro de que quieres eliminar tu cuenta?"
+            ),
+            actions=[
+                ft.TextButton(
+                    "Cancelar",
+                    on_click=lambda e: cerrar(dlg)
+                ),
+                ft.ElevatedButton(
+                    "Eliminar",
+                    on_click=confirmar_eliminacion
+                )
+            ]
+        )
+
+        
+
+        page.dialog = dlg
+        dlg.open = True
+        page.update()
+
+
+    def cerrar(dlg):
+        dlg.open = False
         page.update()
 
     if not user:
@@ -22,14 +64,21 @@ def UserView(page, auth_controller):
             )
         )
 
+    
+
+    def cambiar_pagina(e):
+        if e.control.selected_index == 0:
+            page.go("/home")
+
+        elif e.control.selected_index == 1:
+            page.go("/usuarios")
+
+        elif e.control.selected_index == 2:
+            page.go("/favoritas")
+
     page.navigation_bar = ft.NavigationBar(
         selected_index=1,
-
-        on_change=lambda e:
-            page.go("/home")
-            if e.control.selected_index == 0
-            else page.go("/usuarios"),
-
+        on_change=cambiar_pagina,
         destinations=[
             ft.NavigationBarDestination(
                 icon=ft.Icons.HOME,
@@ -75,6 +124,17 @@ def UserView(page, auth_controller):
                         )
                     ),
 
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        controls=[
+                            ft.Icon(ft.Icons.BADGE, color="white70"),
+                                ft.Text(
+                                f"ID: {user['id_usuarios']}",
+                                color="white70"
+                                )
+                        ]
+                    ),
+
                     ft.Text(
                         f"{user['nombre']} {user['apellido']}",
                         size=24,
@@ -100,7 +160,6 @@ def UserView(page, auth_controller):
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
                             ft.Icon(ft.Icons.PHONE, color="white70"),
-
                             ft.Text(
                                 user["telefono"]
                                 if user["telefono"]
@@ -113,13 +172,15 @@ def UserView(page, auth_controller):
                     ft.Row(
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
-                            ft.Icon(ft.Icons.PHONE, color="white70"),
-
-                            ft.Text(
-                                user["fecha_registro"]
-                                if user["fecha_registro"]
-                                else "Sin fecha de registro",
-                                color="white70"
+                            ft.Row(
+                                alignment=ft.MainAxisAlignment.CENTER,
+                                controls=[
+                                    ft.Icon(ft.Icons.CALENDAR_MONTH, color="white70"),
+                                    ft.Text(
+                                        user["fecha_registro"].strftime("%d/%m/%Y"),
+                                        color="white70"
+                                    )
+                                ]
                             )
                         ]
                     ),
@@ -132,7 +193,21 @@ def UserView(page, auth_controller):
                         on_click=cerrar_sesion
                     ),
 
+                    ft.ElevatedButton(
+                        "Editar perfil",
+                        icon=ft.Icons.EDIT,
+                        bgcolor=ft.Colors.BLUE_400,
+                        color="white",
+                        on_click=editar_perfil
+                    ),
 
+                    ft.ElevatedButton(
+                        "Eliminar cuenta",
+                        icon=ft.Icons.DELETE,
+                        bgcolor=ft.Colors.RED_700,
+                        color="white",
+                        on_click=eliminar_cuenta
+                    ),
                 ]
             )
         )

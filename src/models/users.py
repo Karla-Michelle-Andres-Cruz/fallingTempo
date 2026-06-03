@@ -27,16 +27,23 @@ class Usuarios:
     def login(self, email, password):
         conn = DataBase.get_connection()
         cursor = conn.cursor(dictionary=True)
+
+        print("EMAIL INGRESADO:", email)
+
         cursor.execute(
             "SELECT * FROM usuarios WHERE email = %s",
             (email,)
         )
+
         usuario = cursor.fetchone()
+
+        print("USUARIO ENCONTRADO:", usuario)
+
         cursor.close()
         conn.close()
         if usuario and bcrypt.checkpw(
-            password.encode('utf-8'),
-            usuario['password'].encode('utf-8')
+            password.encode("utf-8"),
+            usuario["password"].encode("utf-8")
         ):
             return usuario
 
@@ -109,5 +116,18 @@ class Usuarios:
         cursor.execute(query, (password_hash, email))
         conn.commit()
 
+        cursor.close()
+        conn.close()
+
+    def eliminar_usuario(self, id_usuario):
+        conn = DataBase.get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "DELETE FROM usuarios WHERE id_usuarios = %s",
+            (id_usuario,)
+        )
+
+        conn.commit()
         cursor.close()
         conn.close()

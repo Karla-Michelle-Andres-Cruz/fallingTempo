@@ -12,13 +12,16 @@ class AuthController:
         self.current_user = None
         self.model = Usuarios()
 
-    def registrar_usuario(self, nombre, apellido, email, password, telefono=None):
+    def registrar_usuario(self, nombre, apellido, email, password, confirm_password, telefono=None):
         try:
+            if password != confirm_password:
+                return False, "Las contraseñas no coinciden"
             nuevo_usuario = UsuarioAlta(
                 nombre=nombre,
                 apellido=apellido,
                 email=email,
                 password=password,
+                confirm_password=confirm_password,
                 telefono=telefono
             )
             self.model.registrar(
@@ -104,3 +107,6 @@ class AuthController:
     
     def logout(self):
         self.current_user = None
+
+    def eliminar_usuario(self, id_usuario):
+        self.model.eliminar_usuario(id_usuario)
