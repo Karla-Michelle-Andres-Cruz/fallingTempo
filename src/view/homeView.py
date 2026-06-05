@@ -13,8 +13,6 @@ def HomeView(page, auth_controller):
             page.go("/home")
         elif index == 1:
             page.go("/usuarios")
-        elif index == 2:
-            page.go("/favoritas")
 
 
     page.navigation_bar = ft.NavigationBar(
@@ -29,11 +27,6 @@ def HomeView(page, auth_controller):
             ft.NavigationBarDestination(
                 icon=ft.Icons.PERSON,
                 label="Usuarios"
-            ),
-
-            ft.NavigationBarDestination(
-                icon=ft.Icons.BOOKMARK_BORDER,
-                label="Favoritas"
             ),
         ]
     )

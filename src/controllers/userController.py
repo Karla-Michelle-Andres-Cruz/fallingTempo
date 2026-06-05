@@ -110,3 +110,25 @@ class AuthController:
 
     def eliminar_usuario(self, id_usuario):
         self.model.eliminar_usuario(id_usuario)
+
+    def actualizar_usuario(
+        self,
+        id_usuario,
+        nombre,
+        apellido,
+        email,
+        telefono
+    ):
+        try:
+            self.model.actualizar_usuario(
+                id_usuario,
+                nombre,
+                apellido,
+                email,
+                telefono
+            )
+
+            return True, "Perfil actualizado"
+
+        except Exception as e:
+            return False, str(e)

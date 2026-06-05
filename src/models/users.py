@@ -131,3 +131,36 @@ class Usuarios:
         conn.commit()
         cursor.close()
         conn.close()
+
+    def actualizar_usuario(
+        self,
+        id_usuario,
+        nombre,
+        apellido,
+        email,
+        telefono
+    ):
+        conn = DataBase.get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            UPDATE usuarios
+            SET nombre=%s,
+                apellido=%s,
+                email=%s,
+                telefono=%s
+            WHERE id_usuarios=%s
+            """,
+            (
+                nombre,
+                apellido,
+                email,
+                telefono,
+                id_usuario
+            )
+        )
+
+        conn.commit()
+        cursor.close()
+        conn.close()

@@ -3,7 +3,7 @@ import flet as ft
 def UserView(page, auth_controller):
 
     page.title = "Perfil"
-    page.bgcolor = "#13294B"
+    page.bgcolor = "#FFF8EC"
 
     user = auth_controller.current_user
 
@@ -15,7 +15,7 @@ def UserView(page, auth_controller):
         page.update()
 
     def editar_perfil(e):
-        page.go("/editar-perfil")
+        page.go("/editar")
 
     def confirmar_eliminacion(e):
         print("ELIMINANDO USUARIO:", user["id_usuarios"])
@@ -60,7 +60,7 @@ def UserView(page, auth_controller):
         return ft.Container(
             content=ft.Text(
                 "No hay sesión iniciada",
-                color="white"
+                color="black"
             )
         )
 
@@ -72,9 +72,6 @@ def UserView(page, auth_controller):
 
         elif e.control.selected_index == 1:
             page.go("/usuarios")
-
-        elif e.control.selected_index == 2:
-            page.go("/favoritas")
 
     page.navigation_bar = ft.NavigationBar(
         selected_index=1,
@@ -89,11 +86,6 @@ def UserView(page, auth_controller):
                 icon=ft.Icons.PERSON,
                 label="Usuarios"
             ),
-
-            ft.NavigationBarDestination(
-                icon=ft.Icons.BOOKMARK_BORDER,
-                label="Favoritas"
-            ),
         ]
     )
 
@@ -104,7 +96,7 @@ def UserView(page, auth_controller):
             width=350,
             padding=25,
             border_radius=20,
-            bgcolor="#1B365D",
+            bgcolor="#DCCCAC",
 
             content=ft.Column(
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -119,7 +111,7 @@ def UserView(page, auth_controller):
                         content=ft.Text(
                             user["nombre"][0].upper(),
                             size=35,
-                            color="white",
+                            color="black",
                             weight=ft.FontWeight.BOLD
                         )
                     ),
@@ -127,10 +119,10 @@ def UserView(page, auth_controller):
                     ft.Row(
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
-                            ft.Icon(ft.Icons.BADGE, color="white70"),
+                            ft.Icon(ft.Icons.BADGE, color="black"),
                                 ft.Text(
                                 f"ID: {user['id_usuarios']}",
-                                color="white70"
+                                color="black"
                                 )
                         ]
                     ),
@@ -138,20 +130,20 @@ def UserView(page, auth_controller):
                     ft.Text(
                         f"{user['nombre']} {user['apellido']}",
                         size=24,
-                        color="white",
+                        color="black",
                         weight=ft.FontWeight.BOLD
                     ),
 
-                    ft.Divider(color="white24"),
+                    ft.Divider(color="black"),
 
                     ft.Row(
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
-                            ft.Icon(ft.Icons.EMAIL, color="white70"),
+                            ft.Icon(ft.Icons.EMAIL, color="black"),
 
                             ft.Text(
                                 user["email"],
-                                color="white70"
+                                color="black"
                             )
                         ]
                     ),
@@ -159,12 +151,12 @@ def UserView(page, auth_controller):
                     ft.Row(
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
-                            ft.Icon(ft.Icons.PHONE, color="white70"),
+                            ft.Icon(ft.Icons.PHONE, color="black"),
                             ft.Text(
                                 user["telefono"]
                                 if user["telefono"]
                                 else "Sin teléfono",
-                                color="white70"
+                                color="black"
                             )
                         ]
                     ),
@@ -175,10 +167,10 @@ def UserView(page, auth_controller):
                             ft.Row(
                                 alignment=ft.MainAxisAlignment.CENTER,
                                 controls=[
-                                    ft.Icon(ft.Icons.CALENDAR_MONTH, color="white70"),
+                                    ft.Icon(ft.Icons.CALENDAR_MONTH, color="black"),
                                     ft.Text(
                                         user["fecha_registro"].strftime("%d/%m/%Y"),
-                                        color="white70"
+                                        color="black"
                                     )
                                 ]
                             )
@@ -189,7 +181,7 @@ def UserView(page, auth_controller):
                         "Cerrar sesión",
                         icon=ft.Icons.LOGOUT,
                         bgcolor=ft.Colors.RED_400,
-                        color="white",
+                        color="black",
                         on_click=cerrar_sesion
                     ),
 
@@ -197,7 +189,7 @@ def UserView(page, auth_controller):
                         "Editar perfil",
                         icon=ft.Icons.EDIT,
                         bgcolor=ft.Colors.BLUE_400,
-                        color="white",
+                        color="black",
                         on_click=editar_perfil
                     ),
 
@@ -205,7 +197,7 @@ def UserView(page, auth_controller):
                         "Eliminar cuenta",
                         icon=ft.Icons.DELETE,
                         bgcolor=ft.Colors.RED_700,
-                        color="white",
+                        color="black",
                         on_click=eliminar_cuenta
                     ),
                 ]

@@ -5,7 +5,7 @@ from view.loginView import LoginView
 from view.registroView import RegistroView
 from view.recuperarView import RecuperarView
 from view.userView import UserView
-from view.favoritosView import FavoritosView
+from view.editarView import EditarView
 
 def start(page: ft.Page):
     auth_ctrl = AuthController()
@@ -25,13 +25,11 @@ def start(page: ft.Page):
             page.controls.append(HomeView(page, auth_ctrl))
         elif page.route == "/usuarios":
             page.controls.append(UserView(page, auth_ctrl))
-        elif page.route == "/favoritas":
-            page.controls.append(FavoritosView(page, auth_ctrl))
+        elif page.route == "/editar":
+            page.controls.append(EditarView(page, auth_ctrl))
         page.update()
         
-    
-    
-        
+
 
     page.on_route_change = route_change
     route_change(None)

@@ -5,7 +5,7 @@ def RegistroView(page, auth_controller):
     nombre_input = ft.TextField(
         label="Nombre",
         label_style=ft.TextStyle(color=ft.Colors.BLACK),
-        width=350,
+        width=300,
         border_radius=10,
         prefix_icon=ft.Icons.PERSON,
         color=ft.Colors.BLACK
@@ -14,7 +14,7 @@ def RegistroView(page, auth_controller):
     apellido_input = ft.TextField(
         label="Apellido",
         label_style=ft.TextStyle(color=ft.Colors.BLACK),
-        width=350,
+        width=300,
         border_radius=10,
         prefix_icon=ft.Icons.BADGE,
         color=ft.Colors.BLACK
@@ -23,7 +23,7 @@ def RegistroView(page, auth_controller):
     email_input = ft.TextField(
         label="Correo electrónico",
         label_style=ft.TextStyle(color=ft.Colors.BLACK),
-        width=350,
+        width=300,
         border_radius=10,
         prefix_icon=ft.Icons.EMAIL,
         color=ft.Colors.BLACK
@@ -32,7 +32,7 @@ def RegistroView(page, auth_controller):
     pass_input = ft.TextField(
         label="Contraseña",
         label_style=ft.TextStyle(color=ft.Colors.BLACK),
-        width=350,
+        width=300,
         border_radius=10,
         password=True,
         can_reveal_password=True,
@@ -43,7 +43,7 @@ def RegistroView(page, auth_controller):
     pass_confirm_input = ft.TextField(
         label="Confirmar contraseña",
         label_style=ft.TextStyle(color=ft.Colors.BLACK),
-        width=350,
+        width=300,
         border_radius=10,
         password=True,
         can_reveal_password=True,
@@ -54,7 +54,7 @@ def RegistroView(page, auth_controller):
     telefono_input = ft.TextField(
         label="Teléfono",
         label_style=ft.TextStyle(color=ft.Colors.BLACK),
-        width=350,
+        width=300,
         border_radius=10,
         prefix_icon=ft.Icons.PHONE,
         color=ft.Colors.BLACK
@@ -67,7 +67,7 @@ def RegistroView(page, auth_controller):
             return False, "La contraseña debe tener al menos 6 caracteres"
         return True, ""
 
-    error_text = ft.Text("", color=ft.Colors.RED, size=20)
+    error_text = ft.Text("", color=ft.Colors.RED, size=10)
 
     def registrar_click(e):
 
@@ -118,7 +118,7 @@ def RegistroView(page, auth_controller):
 
                 ft.Text(
                     "Crear cuenta nueva",
-                    size=32,
+                    size=25,
                     weight="bold",
                     color=ft.Colors.BLACK
                 ),
@@ -133,19 +133,22 @@ def RegistroView(page, auth_controller):
                 ft.ElevatedButton(
                     "Registrarse",
                     on_click=registrar_click,
-                    width=350,
-                    height=45,
+                    width=300,
+                    height=30,
                     bgcolor="#DCCCAC",
                     color=ft.Colors.BLACK
                 ),
 
                 error_text,
 
-                ft.TextButton(
+                ft.ElevatedButton(
                     "Ya tengo cuenta",
+                    width=300,
+                    height=30,
+                    bgcolor="#DCCCAC",
+                    color=ft.Colors.BLACK,
                     on_click=lambda _: page.go("/")
                 )
-
             ],
 
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,

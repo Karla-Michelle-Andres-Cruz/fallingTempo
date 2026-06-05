@@ -137,8 +137,12 @@ def RecuperarView(page, auth_controller):
                     color=ft.Colors.BLACK
                 ),
 
-                ft.TextButton(
+                ft.ElevatedButton(
                     "Volver al login",
+                    width=350,
+                    height=45,
+                    bgcolor="#DCCCAC",
+                    color=ft.Colors.BLACK,
                     on_click=lambda _: page.go("/")
                 )
             ],

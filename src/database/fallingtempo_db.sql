@@ -59,20 +59,6 @@ CREATE TABLE IF NOT EXISTS `cancion` (
 
 -- Volcando datos para la tabla fallingtempo_db.cancion: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla fallingtempo_db.favorito_user
-CREATE TABLE IF NOT EXISTS `favorito_user` (
-    `id_favorito` int(11) NOT NULL AUTO_INCREMENT,
-    `id_usuario` int(11) NOT NULL,
-    `id_cancion` int(11) NOT NULL,
-    PRIMARY KEY (`id_favorito`),
-    KEY `fk_favorito_usuario` (`id_usuario`),
-    KEY `fk_favorito_cancion` (`id_cancion`),
-    CONSTRAINT `fk_favorito_cancion` FOREIGN KEY (`id_cancion`) REFERENCES `cancion` (`id_cancion`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `fk_favorito_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla fallingtempo_db.favorito_user: ~0 rows (aproximadamente)
-
 -- Volcando estructura para tabla fallingtempo_db.guitarra
 CREATE TABLE IF NOT EXISTS `guitarra` (
     `id_guitarra` int(11) NOT NULL AUTO_INCREMENT,
