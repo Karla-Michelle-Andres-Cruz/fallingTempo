@@ -17,40 +17,23 @@ def UserView(page, auth_controller):
     def editar_perfil(e):
         page.go("/editar")
 
-    def confirmar_eliminacion(e):
-        print("ELIMINANDO USUARIO:", user["id_usuarios"])
-        auth_controller.eliminar_usuario(user["id_usuarios"])
-        auth_controller.logout()
-        page.navigation_bar = None
-        if page.data:
-            page.data.clear()
-        page.go("/")
-
     def eliminar_cuenta(e):
-        dlg = ft.AlertDialog(
-            modal=True,
-            title=ft.Text("Confirmar eliminación"),
-            content=ft.Text(
-                "¿Estás seguro de que quieres eliminar tu cuenta?"
-            ),
-            actions=[
-                ft.TextButton(
-                    "Cancelar",
-                    on_click=lambda e: cerrar(dlg)
-                ),
-                ft.ElevatedButton(
-                    "Eliminar",
-                    on_click=confirmar_eliminacion
-                )
-            ]
+        auth_controller.eliminar_usuario(
+            user["id_usuarios"]
         )
 
-        
+        auth_controller.logout()
 
-        page.dialog = dlg
-        dlg.open = True
+        page.snack_bar = ft.SnackBar(
+            content=ft.Text("Cuenta eliminada correctamente")
+        )
+        page.snack_bar.open = True
+
+        page.navigation_bar = None
+        page.data = None
+
+        page.go("/")
         page.update()
-
 
     def cerrar(dlg):
         dlg.open = False
@@ -197,9 +180,9 @@ def UserView(page, auth_controller):
                         "Eliminar cuenta",
                         icon=ft.Icons.DELETE,
                         bgcolor=ft.Colors.RED_700,
-                        color="black",
+                        color="white",
                         on_click=eliminar_cuenta
-                    ),
+                    )
                 ]
             )
         )
