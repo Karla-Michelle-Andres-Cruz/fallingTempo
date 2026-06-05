@@ -22,8 +22,6 @@ def LoginView(page, auth_controller):
         color=ft.Colors.BLACK
     )
 
-    error_text = ft.Text("", color=ft.Colors.RED)
-
     def login_click(e):
         user, msg = auth_controller.login(
             email_input.value,
@@ -34,9 +32,12 @@ def LoginView(page, auth_controller):
             auth_controller.current_user = user
             page.go("/home")
         else:
-            error_text.value = msg
+            page.show_dialog(ft.SnackBar(
+                ft.Text(msg, color=ft.Colors.WHITE),
+                bgcolor=ft.Colors.RED,
+                open=True
+            ))
             page.update()
-
 
     return ft.Container(
         expand=True,
@@ -74,8 +75,6 @@ def LoginView(page, auth_controller):
                     bgcolor="#DCCCAC",
                     color=ft.Colors.BLACK
                 ),
-
-                error_text,
 
                 ft.ElevatedButton(
                     "Crear una cuenta nueva",

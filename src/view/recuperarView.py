@@ -30,18 +30,15 @@ def RecuperarView(page, auth_controller):
         color=ft.Colors.BLACK,
     )
 
-    mensaje_text = ft.Text(
-        "",
-        size=16,
-        weight=ft.FontWeight.BOLD
-    )
-
     def enviar_codigo(e):
 
         if not email_input.value:
-            mensaje_text.value = "Ingrese un correo electrónico"
-            mensaje_text.color = ft.Colors.RED
-            page.update()
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("Ingrese un correo electrónico", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
             return
 
         success, msg = auth_controller.enviar_codigo_recuperacion(
@@ -49,30 +46,41 @@ def RecuperarView(page, auth_controller):
         )
 
         if success:
-            mensaje_text.value = "✓ Código enviado al correo"
-            mensaje_text.color = ft.Colors.GREEN
-
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("✓ Código enviado al correo", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.GREEN
+                )
+            )
             codigo_input.visible = True
             nueva_pass_input.visible = True
-
+            page.update()
         else:
-            mensaje_text.value = msg
-            mensaje_text.color = ft.Colors.RED
-
-        page.update()
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text(msg, color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
 
     def cambiar_password(e):
 
         if not codigo_input.value:
-            mensaje_text.value = "Ingrese el código recibido"
-            mensaje_text.color = ft.Colors.RED
-            page.update()
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("Ingrese el código recibido", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
             return
 
         if not nueva_pass_input.value:
-            mensaje_text.value = "Ingrese una nueva contraseña"
-            mensaje_text.color = ft.Colors.RED
-            page.update()
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("Ingrese una nueva contraseña", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
             return
 
         success, msg = auth_controller.cambiar_password(
@@ -82,16 +90,20 @@ def RecuperarView(page, auth_controller):
         )
 
         if success:
-            mensaje_text.value = "✓ Contraseña actualizada correctamente"
-            mensaje_text.color = ft.Colors.GREEN
-            page.update()
-
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("✓ Contraseña actualizada correctamente", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.GREEN
+                )
+            )
             page.go("/")
-
         else:
-            mensaje_text.value = msg
-            mensaje_text.color = ft.Colors.RED
-            page.update()
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text(msg, color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
 
     return ft.Container(
         expand=True,
@@ -116,8 +128,6 @@ def RecuperarView(page, auth_controller):
                 email_input,
                 codigo_input,
                 nueva_pass_input,
-
-                mensaje_text,
 
                 ft.ElevatedButton(
                     "Enviar código",

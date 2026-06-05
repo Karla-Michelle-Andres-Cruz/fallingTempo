@@ -901,7 +901,7 @@ Bd|d--oo-oo-oo--o--|o---o-----------|
 
                 ft.ElevatedButton(
                     "Volver",
-                    on_click=go_back
+                    on_click=lambda _: page.go("/home")
                 )
             ]
         )

@@ -67,9 +67,17 @@ def RegistroView(page, auth_controller):
             return False, "La contraseña debe tener al menos 6 caracteres"
         return True, ""
 
-    error_text = ft.Text("", color=ft.Colors.RED, size=10)
-
     def registrar_click(e):
+
+        if not nombre_input.value or not apellido_input.value or not email_input.value \
+            or not pass_input.value or not pass_confirm_input.value or not telefono_input.value:
+                page.show_dialog(
+                    ft.SnackBar(
+                        ft.Text("Por favor, completa todos los campos", color=ft.Colors.WHITE),
+                        bgcolor=ft.Colors.RED
+                    )
+                )
+                return
 
         valido, mensaje = validarPassword(
             pass_input.value,
@@ -77,8 +85,12 @@ def RegistroView(page, auth_controller):
         )
 
         if not valido:
-            error_text.value = mensaje
-            page.update()
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text(mensaje, color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
             return
 
         success, msg = auth_controller.registrar_usuario(
@@ -91,16 +103,23 @@ def RegistroView(page, auth_controller):
         )
 
         if success:
-            error_text.color = ft.Colors.GREEN_300
-            error_text.value = "Usuario creado correctamente"
-        else:
-            error_text.color = ft.Colors.RED_300
-            error_text.value = msg
-
-        page.update()
-
-        if success:
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("Usuario creado correctamente", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.GREEN
+                )
+            )
             page.go("/")
+        else:
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text(msg, color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
+
+
+
 
     return ft.Container(
         expand=True,
@@ -138,9 +157,6 @@ def RegistroView(page, auth_controller):
                     bgcolor="#DCCCAC",
                     color=ft.Colors.BLACK
                 ),
-
-                error_text,
-
                 ft.ElevatedButton(
                     "Ya tengo cuenta",
                     width=300,
