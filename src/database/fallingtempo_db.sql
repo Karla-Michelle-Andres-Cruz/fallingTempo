@@ -19,56 +19,6 @@
 CREATE DATABASE IF NOT EXISTS `fallingtempo_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `fallingtempo_db`;
 
--- Volcando estructura para tabla fallingtempo_db.bajo
-CREATE TABLE IF NOT EXISTS `bajo` (
-    `id_bajo` int(11) NOT NULL AUTO_INCREMENT,
-    `nombre` varchar(200) NOT NULL,
-    `sesion_bajo` varchar(200) NOT NULL,
-    PRIMARY KEY (`id_bajo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla fallingtempo_db.bajo: ~0 rows (aproximadamente)
-
--- Volcando estructura para tabla fallingtempo_db.bateria
-CREATE TABLE IF NOT EXISTS `bateria` (
-    `id_bateria` int(11) NOT NULL AUTO_INCREMENT,
-    `nombre` varchar(150) NOT NULL,
-    `sesion_bateria` varchar(200) NOT NULL,
-    PRIMARY KEY (`id_bateria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla fallingtempo_db.bateria: ~0 rows (aproximadamente)
-
--- Volcando estructura para tabla fallingtempo_db.cancion
-CREATE TABLE IF NOT EXISTS `cancion` (
-    `id_cancion` int(11) NOT NULL AUTO_INCREMENT,
-    `nombre_cancion` varchar(150) NOT NULL,
-    `artista` varchar(150) NOT NULL,
-    `genero` varchar(150) NOT NULL,
-    `id_bateria` int(11) NOT NULL,
-    `id_guitarra` int(11) NOT NULL,
-    `id_bajo` int(11) NOT NULL,
-    PRIMARY KEY (`id_cancion`),
-    KEY `fk_cancion_bateria` (`id_bateria`),
-    KEY `fk_cancion_guitarra` (`id_guitarra`),
-    KEY `fk_cancion_bajo` (`id_bajo`),
-    CONSTRAINT `fk_cancion_bajo` FOREIGN KEY (`id_bajo`) REFERENCES `bajo` (`id_bajo`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `fk_cancion_bateria` FOREIGN KEY (`id_bateria`) REFERENCES `bateria` (`id_bateria`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `fk_cancion_guitarra` FOREIGN KEY (`id_guitarra`) REFERENCES `guitarra` (`id_guitarra`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla fallingtempo_db.cancion: ~0 rows (aproximadamente)
-
--- Volcando estructura para tabla fallingtempo_db.guitarra
-CREATE TABLE IF NOT EXISTS `guitarra` (
-    `id_guitarra` int(11) NOT NULL AUTO_INCREMENT,
-    `nombre` varchar(150) NOT NULL,
-    `sesion_guitarra` varchar(200) NOT NULL,
-    PRIMARY KEY (`id_guitarra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla fallingtempo_db.guitarra: ~0 rows (aproximadamente)
-
 -- Volcando estructura para tabla fallingtempo_db.recuperacion_password
 CREATE TABLE IF NOT EXISTS `recuperacion_password` (
     `id` int(11) NOT NULL AUTO_INCREMENT,

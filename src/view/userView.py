@@ -24,10 +24,12 @@ def UserView(page, auth_controller):
 
         auth_controller.logout()
 
-        page.snack_bar = ft.SnackBar(
-            content=ft.Text("Cuenta eliminada correctamente")
+        page.show_dialog(
+            ft.SnackBar(
+                ft.Text("Cuenta eliminada correctamente", color=ft.Colors.WHITE),
+                bgcolor=ft.Colors.RED
+            )
         )
-        page.snack_bar.open = True
 
         page.navigation_bar = None
         page.data = None
@@ -35,9 +37,6 @@ def UserView(page, auth_controller):
         page.go("/")
         page.update()
 
-    def cerrar(dlg):
-        dlg.open = False
-        page.update()
 
     if not user:
         return ft.Container(

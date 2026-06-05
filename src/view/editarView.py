@@ -32,8 +32,6 @@ def EditarView(page, auth_controller):
         color=ft.Colors.BLACK
     )
 
-    mensaje = ft.Text()
-
     def guardar_cambios(e):
 
         success, msg = auth_controller.actualizar_usuario(
@@ -45,20 +43,25 @@ def EditarView(page, auth_controller):
         )
 
         if success:
-
             auth_controller.current_user["nombre"] = nombre_input.value
             auth_controller.current_user["apellido"] = apellido_input.value
             auth_controller.current_user["email"] = email_input.value
             auth_controller.current_user["telefono"] = telefono_input.value
 
-            mensaje.value = "✓ Perfil actualizado"
-            mensaje.color = ft.Colors.GREEN
-
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text("✓ Perfil actualizado", color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.GREEN
+                )
+            )
         else:
-            mensaje.value = msg
-            mensaje.color = ft.Colors.RED
+            page.show_dialog(
+                ft.SnackBar(
+                    ft.Text(msg, color=ft.Colors.WHITE),
+                    bgcolor=ft.Colors.RED
+                )
+            )
 
-        page.update()
 
     return ft.Container(
         expand=True,
@@ -77,9 +80,6 @@ def EditarView(page, auth_controller):
                 apellido_input,
                 email_input,
                 telefono_input,
-
-                mensaje,
-
                 ft.ElevatedButton(
                     "Guardar cambios",
                     bgcolor="#99AD7A",
