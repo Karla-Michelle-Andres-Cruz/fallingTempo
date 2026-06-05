@@ -12,6 +12,8 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "secure-smtplib>=0.1.1",
     "flet-audio>=0.85.1",
+    "pygame>=2.6.1",
+    "mutagen>=1.47.0",
 ]
 
 
